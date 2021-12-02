@@ -32,13 +32,13 @@ $printer = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $bishWords = explode(" ", $printer['bishop']);
 // no diocesan administrators though
 
-switch (substr($printer['title'],3)) {
+switch (substr($printer['title'],0,3)) {
 	case 'Dio':
 		$title = "Diocesan Administrator";
 		break;
-		case 'Apo':
-			$title = "Apostolic Administrator";
-			break;
+	case 'Apo':
+		$title = "Apostolic Administrator";
+		break;
 	default:
 		$title = "Diocesan Bishop";
 		break;
