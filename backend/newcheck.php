@@ -72,4 +72,4 @@ foreach($html->find('div[class=node__content]') as $diocese)
 	//echo mysqli_error($db);
 }
 
- ?>
+?>
