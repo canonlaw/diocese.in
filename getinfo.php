@@ -39,6 +39,9 @@ switch (substr($printer['title'],0,3)) {
 	case 'Apo':
 		$title = "Apostolic Administrator";
 		break;
+	case 'Bis':
+		$title = "Bishop Emeritus";
+		break;
 	default:
 		$title = "Diocesan Bishop";
 		break;
