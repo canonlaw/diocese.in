@@ -1,3 +1,3 @@
 Use config.php to create variables $dbuser and $dbpass for the database connection.
 
-Run `php -f ./coa/newcheck.php` to update database information from the USCCB website. RUN AT YOUR OWN RISK, IN A SANDBOXED ENVIRONMENT. SUBJECT TO ISSUES AS YOU'RE PULLING FROM AN EXTERNAL SITE.
+Run `php -f ./backend/newcheck.php` to update database information from the USCCB website. RUN AT YOUR OWN RISK, IN A SANDBOXED ENVIRONMENT. SUBJECT TO ISSUES AS YOU'RE PULLING FROM AN EXTERNAL SITE.
