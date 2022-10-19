@@ -74,7 +74,7 @@ if(!file_exists("./coa/{$printer['basezip']}.png"))
 	echo '<img src="./coa/00000.png" align="right"><!-- no image for '.$printer["basezip"] .' -->';
 else
 	echo '<img src="./coa/'.$printer['basezip'].'.png" align="right">';
-echo "You are in the...<br /><br /><strong>".$printer['name']."</strong><br />";
+echo "<a href=\"./\" style=\"text-decoration: none;\">📍</a> You are in the...<br /><br /><strong>".$printer['name']."</strong><br />";
 echo $printer['addr']."<br /><br />";
 
 /*if(!$da)
@@ -92,7 +92,7 @@ if(trim($printer['auxbish']) != "")
 	echo $printer['auxbish']."<br />";
 }
 
-echo "<div id=\"dataUpdated\">Diocesan data last updated ".$printer['lastupdated']."</div>";
+echo "<div id=\"dataUpdated\">This diocese's data was last updated ".$printer['lastupdated']."</div>";
 
 
 $browser = get_browser(null,true);

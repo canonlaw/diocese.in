@@ -3,7 +3,7 @@
 <head>
 	<title>What Diocese am I In?</title>
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-	<script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places,visualization&amp;key=AIzaSyCwtBQNdYu0GcDm98BL6f82uXHVTxI6MLs"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places,visualization&amp;key=AIzaSyCwtBQNdYu0GcDm98BL6f82uXHVTxI6MLs"></script>
 	<script>
 	$( window ).resize(function() {
 		$("#site").css("height", $("#sitedata").css("height"));
@@ -22,7 +22,7 @@
 	} else {
 		?>
 		//event.preventDefault();
-	//	$(this).html('Determining address...');
+		console.log('Determining address...');
 
 		navigator.geolocation.getCurrentPosition(function (position) {
 			var geocoder = new google.maps.Geocoder();
@@ -62,7 +62,7 @@
 					}
 				}
 			});
-		});
+		}, function (err) {$("div#info").html(`An error occurred: ${err.message}`)});
 		return false;
 	<?php } ?>
 });
@@ -79,10 +79,12 @@
 			</div>
 <br />
 			<div>
-				Manually enter your zip code: <form action="index.php" method="get"><input id="zip" name="zip" type="text" pattern="[0-9]*"><input type="submit" value="Submit"></form>
+				Manually enter your zip code: <form action="index.php" method="get"><input id="zip" name="zip" type="text" pattern="[0-9]*"><input class="button" type="submit" value="Submit"></form>
 			</div>
 <br />
-			<div id="credits">Send comments to <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a></div>
+		<div id="credits">
+			Send comments to <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a><br />
+			Buy me ☕: <a href="https://paypal.me/PaulHedman" target="new">PayPal</a> - <a href="https://cash.me/$PaulHedman" target="new">CashApp</a> - <a href="https://venmo.com/penguinpaul" target="new">Venmo</a</div>
 		</div>
 	</div>
 	<script>
