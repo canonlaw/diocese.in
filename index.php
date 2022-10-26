@@ -25,42 +25,60 @@
 		console.log('Determining address...');
 
 		navigator.geolocation.getCurrentPosition(function (position) {
+			console.log('New geocoder...');
 			var geocoder = new google.maps.Geocoder();
+			console.log('Getting latLng...');
 			var latLng   = new google.maps.LatLng(
-				position.coords.latitude, position.coords.longitude);
+			position.coords.latitude, position.coords.longitude);
 			geocoder.geocode({
 				'latLng': latLng
 			}, function (results, status) {
+				console.log('Address results...' + status);
 				badcountry = false;
+				console.log(results);
+
+				// figure out the country first
 				for (var i = 0; i < results[0].address_components.length; i++) {
 					var address = results[0].address_components[i];
+					console.log("Looking for country...")
 					if(address.types[0] == "country")
 					{
+						console.log('Country discovered... '+address.short_name);
 						if(address.short_name != "US")
 						{
 							$("div#info").html("Sorry, this service is only available in the United States and our location detection seems to think you're not in the US of A.");
 							badcountry = true;
 						}
 					}
+				}
 
-					if (address.types[0] == "postal_code" && !badcountry) {
-						zipcode = address.long_name;
-						<?php if (isset($_GET['zip'])) {echo "zipcode = ".str_pad((int)$_GET['zip'], 5, "0", STR_PAD_LEFT).";";} ?>
-						$.get("getinfo.php?zip="+zipcode, function( diocese ) {
-							console.log(zipcode + "zip dioce"+ diocese);
-							$("div#info").html(diocese);
-							/*$.ajax({
-								url: './coa/'+diocese.parent+'.png', //or your url
-								success: function(data){
-									$("#site").css("background-image", 'url("./coa/'+diocese.parent+'.png")');
-								},
-								error: function(data){
-									// does not have a coat of arms on file
-								},
-							});*/
-						});
+				// If it's not an invalid country, go looking
+				if(!badcountry)
+				{
+					for (var j = 0; j < results[0].address_components.length; j++) {
+						var zipAddress = results[0].address_components[j];
+						console.log(j + " " + zipAddress.types[0]);
+						if (zipAddress.types[0] == "postal_code") {
+							console.log("Found postal code..." + j)
+							zipcode = zipAddress.long_name;
+							<?php if (isset($_GET['zip'])) {echo "zipcode = ".str_pad((int)$_GET['zip'], 5, "0", STR_PAD_LEFT).";";} ?>
+							$.get("getinfo.php?zip="+zipcode, function( diocese ) {
+								console.log(zipcode + "zip dioce"+ diocese);
+								$("div#info").html(diocese);
+								/*$.ajax({
+									url: './coa/'+diocese.parent+'.png', //or your url
+									success: function(data){
+										$("#site").css("background-image", 'url("./coa/'+diocese.parent+'.png")');
+									},
+									error: function(data){
+										// does not have a coat of arms on file
+									},
+								});*/
+							});
+						}
 					}
 				}
+
 			});
 		}, function (err) {$("div#info").html(`An error occurred: ${err.message}`)});
 		return false;
