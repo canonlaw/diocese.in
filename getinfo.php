@@ -39,9 +39,9 @@ switch (substr($printer['title'],0,3)) {
 	case 'Apo':
 		$title = "Apostolic Administrator";
 		break;
-	case 'Bis':
-		$title = "Bishop Emeritus";
-		break;
+	//case 'Bis':
+	//	$title = "Bishop Emeritus";
+	//	break;
 	default:
 		$title = "Diocesan Bishop";
 		break;
@@ -51,9 +51,6 @@ if(strpos($printer['bishop'], "Diocesan Administrator") === false)
 {
 	$da = false;
 	$bishName = $bishWords[1];
-
-	if($bishName == "J." && $bishWords[2] == "Douglas")
-		$bishName = "Douglas";
 
 	$query2 = "SELECT * FROM englat WHERE eng='{$bishName}'";
 	$result2 = mysqli_query($db,$query2);

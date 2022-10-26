@@ -77,14 +77,15 @@
 			<div id="info">
 				Loading... <br /><br />
 			</div>
-<br />
+				<br />
 			<div>
 				Manually enter your zip code: <form action="index.php" method="get"><input id="zip" name="zip" type="text" pattern="[0-9]*"><input class="button" type="submit" value="Submit"></form>
 			</div>
-<br />
-		<div id="credits">
-			Send comments to <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a><br />
-			Buy me ☕: <a href="https://paypal.me/PaulHedman" target="new">PayPal</a> - <a href="https://cash.me/$PaulHedman" target="new">CashApp</a> - <a href="https://venmo.com/penguinpaul" target="new">Venmo</a</div>
+				<br />
+			<div id="credits">
+				Buy me ☕: <a href="https://paypal.me/PaulHedman" target="new">PayPal</a> - <a href="https://cash.me/$PaulHedman" target="new">CashApp</a> - <a href="https://venmo.com/penguinpaul" target="new">Venmo</a><br />
+				📧: <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a>
+			</div>
 		</div>
 	</div>
 	<script>

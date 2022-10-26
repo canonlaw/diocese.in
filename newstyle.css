@@ -25,3 +25,9 @@ img {
 #dataUpdated {
 	font-size: 15px;
 }
+
+a, a:hover, a:focus, a:visited {color: #0000EE}
+
+#credits {
+	text-align: center;
+}
