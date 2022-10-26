@@ -56,6 +56,13 @@
 					{
 						// Vatican Easter Egg
 						$("div#info").html('<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Coat_of_arms_Holy_See.svg/100px-Coat_of_arms_Holy_See.svg.png" align="right"><a href="./" style="text-decoration: none;">📍</a> You are in the...<br /><br /><strong>Diocese of Rome</strong><br />P.zza S. Giovanni in Laterano 6<br />00184 Roma<br /><a href="https://www.vatican.va">https://www.vatican.va</a><br /><br /><strong><em>Diocesan Bishop</strong></em><br />Francis<br /><em>... et Papa nostro Francisco...</em>');
+					} else if(country == "GU") {
+						// we can support Guam too, as a treat
+						$.get("getinfo.php?zip=96910", function( diocese ) {
+							console.log("ZIP = 96910");
+							console.log(diocese);
+							$("div#info").html(diocese);
+						});
 					} else {
 						console.log(country);
 						$("div#info").html("Sorry, this service is only available in the United States and Vatican City.");
