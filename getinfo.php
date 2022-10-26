@@ -86,7 +86,7 @@ echo $printer['bishop']."{$latinName}<br /><br />";
 if(trim($printer['auxbish']) != "")
 {
 	echo "<strong><em>Other Bishops</strong></em><br />";
-	echo $printer['auxbish']."<br />";
+	echo $printer['auxbish'];
 }
 
 echo "<div id=\"dataUpdated\">This diocese's data was last updated ".$printer['lastupdated']."</div>";

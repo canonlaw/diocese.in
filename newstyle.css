@@ -6,8 +6,8 @@ body {
 #sitedata {
 	padding:5px;
 	max-width: 400px;
-    margin: auto;
-    border: 1px solid black;
+	margin: auto;
+	border: 1px solid black;
 }
 
 img {
@@ -16,6 +16,7 @@ img {
 
 #credits {
 	font-size: 15px;
+	text-align: center;
 }
 
 .button {
@@ -27,7 +28,3 @@ img {
 }
 
 a, a:hover, a:focus, a:visited {color: #0000EE}
-
-#credits {
-	text-align: center;
-}

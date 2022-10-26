@@ -8,11 +8,10 @@
 	$( window ).resize(function() {
 		$("#site").css("height", $("#sitedata").css("height"));
 	//	$("#site").css("width", $("#sitedata").css("width"));
-
 	});
 	$( document ).ready(function() {
 
-		<?php
+<?php
 		if (isset($_GET['zip'])) {
 		echo 'zipcode = "'.str_pad((int)$_GET['zip'], 5, "0", STR_PAD_LEFT).'";
 		$.get("getinfo.php?zip="+zipcode, function( diocese ) {
@@ -20,7 +19,7 @@
 			$("div#info").html(diocese);
 		});';
 	} else {
-		?>
+?>
 		//event.preventDefault();
 		console.log('Determining address...');
 
@@ -37,52 +36,53 @@
 				badcountry = false;
 				console.log(results);
 
-				// figure out the country first
-				for (var i = 0; i < results[0].address_components.length; i++) {
-					var address = results[0].address_components[i];
-					console.log("Looking for country...")
-					if(address.types[0] == "country")
-					{
-						console.log('Country discovered... '+address.short_name);
-						if(address.short_name != "US")
-						{
-							$("div#info").html("Sorry, this service is only available in the United States and our location detection seems to think you're not in the US of A.");
-							badcountry = true;
+				// Churn through all returned data for a country code
+				for(i=0; i < results.length; i++){
+					for(var j=0;j < results[i].address_components.length; j++){
+						for(var k=0; k < results[i].address_components[j].types.length; k++){
+							if(results[i].address_components[j].types[k] == "country"){
+								country = results[i].address_components[j].short_name;
+							}
 						}
 					}
 				}
 
-				// If it's not an invalid country, go looking
-				if(!badcountry)
+				if(country != "US")
 				{
-					for (var j = 0; j < results[0].address_components.length; j++) {
-						var zipAddress = results[0].address_components[j];
-						console.log(j + " " + zipAddress.types[0]);
-						if (zipAddress.types[0] == "postal_code") {
-							console.log("Found postal code..." + j)
-							zipcode = zipAddress.long_name;
-							<?php if (isset($_GET['zip'])) {echo "zipcode = ".str_pad((int)$_GET['zip'], 5, "0", STR_PAD_LEFT).";";} ?>
-							$.get("getinfo.php?zip="+zipcode, function( diocese ) {
-								console.log(zipcode + "zip dioce"+ diocese);
-								$("div#info").html(diocese);
-								/*$.ajax({
-									url: './coa/'+diocese.parent+'.png', //or your url
-									success: function(data){
-										$("#site").css("background-image", 'url("./coa/'+diocese.parent+'.png")');
-									},
-									error: function(data){
-										// does not have a coat of arms on file
-									},
-								});*/
-							});
+					// If you want me to make your country available,
+					// send a database with the dioceses of your country
+					// and the corresponding postal codes. Thank you
+					if(country == "VA")
+					{
+						// Vatican Easter Egg
+						$("div#info").html('<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Coat_of_arms_Holy_See.svg/100px-Coat_of_arms_Holy_See.svg.png" align="right"><a href="./" style="text-decoration: none;">📍</a> You are in the...<br /><br /><strong>Diocese of Rome</strong><br />P.zza S. Giovanni in Laterano 6<br />00184 Roma<br /><a href="https://www.vatican.va">https://www.vatican.va</a><br /><br /><strong><em>Diocesan Bishop</strong></em><br />Francis<br /><em>... et Papa nostro Francisco...</em>');
+					} else {
+						console.log(country);
+						$("div#info").html("Sorry, this service is only available in the United States and Vatican City.");
+						badcountry = true;
+					}
+				} else {
+					// Churn through all returned data for a zip code
+					for(i=0; i < results.length; i++){
+						for(var j=0;j < results[i].address_components.length; j++){
+							for(var k=0; k < results[i].address_components[j].types.length; k++){
+								if(results[i].address_components[j].types[k] == "postal_code"){
+									zipcode = results[i].address_components[j].short_name;
+								}
+							}
 						}
 					}
-				}
 
+					$.get("getinfo.php?zip="+zipcode, function( diocese ) {
+						console.log("ZIP = " + zipcode);
+						console.log(diocese);
+						$("div#info").html(diocese);
+					});
+				}
 			});
 		}, function (err) {$("div#info").html(`An error occurred: ${err.message}`)});
 		return false;
-	<?php } ?>
+<?php } ?>
 });
 </script>
 <link href="newstyle.css" rel="stylesheet" type="text/css" media="all">
@@ -97,12 +97,12 @@
 			</div>
 				<br />
 			<div>
-				Manually enter your zip code: <form action="index.php" method="get"><input id="zip" name="zip" type="text" pattern="[0-9]*"><input class="button" type="submit" value="Submit"></form>
+				<form action="index.php" method="get"><label for="zip">Manual zip code: </label><input id="zip" name="zip" type="text" pattern="[0-9]*" maxlength="5" size="7"><input class="button" type="submit" value="Go"></form>
 			</div>
 				<br />
 			<div id="credits">
-				Buy me ☕: <a href="https://paypal.me/PaulHedman" target="new">PayPal</a> - <a href="https://cash.me/$PaulHedman" target="new">CashApp</a> - <a href="https://venmo.com/penguinpaul" target="new">Venmo</a><br />
-				📧: <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a>
+				Buy ☕: <a href="https://paypal.me/PaulHedman" target="new">PayPal</a> - <a href="https://cash.me/$PaulHedman" target="new">CashApp</a> - <a href="https://venmo.com/penguinpaul" target="new">Venmo</a><br />
+				Send 📧: <a href="mailto:webmaster@diocese.in">webmaster@diocese.in</a>
 			</div>
 		</div>
 	</div>
@@ -111,7 +111,6 @@
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
 	  ga('create', 'UA-57204706-1', 'auto');
 	  ga('send', 'pageview');
 	</script>
