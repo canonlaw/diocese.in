@@ -47,65 +47,70 @@
 					}
 				}
 
-				if(country != "US" && country != "PR")
-				{
-					// If you want me to make your country available,
-					// send a database with the dioceses of your country
-					// and the corresponding postal codes. Thank you
-					if(country == "VA")
-					{
-						// Vatican Easter Egg
-						$("div#info").html('<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Coat_of_arms_Holy_See.svg/100px-Coat_of_arms_Holy_See.svg.png" align="right"><a href="./" style="text-decoration: none;">📍</a> You are in the...<br /><br /><strong>Diocese of Rome</strong><br />P.zza S. Giovanni in Laterano 6<br />00184 Roma<br /><a href="https://www.vatican.va">https://www.vatican.va</a><br /><br /><strong><em>Diocesan Bishop</strong></em><br />Francis<br /><em>...una cum famulo tuo Papa nostro Francisco...</em>');
-					} else if(country == "GU") {
-						// we can support Guam too, as a treat
-						$.get("getinfo.php?zip=96910", function( diocese ) {
-							console.log("ZIP = 96910");
-							console.log(diocese);
-							$("div#info").html(diocese);
-						});
-					} else if(country == "VI") {
-						// we can support the US Virgin Islands too, as a treat
-						$.get("getinfo.php?zip=00802", function( diocese ) {
-							console.log("ZIP = 00802");
-							console.log(diocese);
-							$("div#info").html(diocese);
-						});
-					} else if(country == "MP") {
-						// we can support Northern Mariana Islands too, as a treat
-						$.get("getinfo.php?zip=96950", function( diocese ) {
-							console.log("ZIP = 96950");
-							console.log(diocese);
-							$("div#info").html(diocese);
-						});
-					} else if(country == "AS") {
-						// we can support American Samoa too, as a treat
-						$.get("getinfo.php?zip=96799", function( diocese ) {
-							console.log("ZIP = 96799");
-							console.log(diocese);
-							$("div#info").html(diocese);
-						});
-					} else {
-						console.log(country);
-						$("div#info").html("Sorry, this service is only available in the United States and Vatican City.");
-						badcountry = true;
-					}
+				if (typeof country === 'undefined') {
+					$("div#info").html("Location services say that you don't seem to be in a recognized nation right now.");
 				} else {
-					// Churn through all returned data for a zip code
-					for(i=0; i < results.length; i++){
-						for(var j=0;j < results[i].address_components.length; j++){
-							for(var k=0; k < results[i].address_components[j].types.length; k++){
-								if(results[i].address_components[j].types[k] == "postal_code"){
-									zipcode = results[i].address_components[j].short_name;
+					console.log(country);
+
+					if(country != "US" && country != "PR")
+					{
+						// If you want me to make your country available,
+						// send a database with the dioceses of your country
+						// and the corresponding postal codes. Thank you
+						if(country == "VA")
+						{
+							// Vatican Easter Egg
+							$("div#info").html('<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Coat_of_arms_Holy_See.svg/100px-Coat_of_arms_Holy_See.svg.png" align="right"><a href="./" style="text-decoration: none;">📍</a> You are in the...<br /><br /><strong>Diocese of Rome</strong><br />P.zza S. Giovanni in Laterano 6<br />00184 Roma<br /><a href="https://www.vatican.va">https://www.vatican.va</a><br /><br /><strong><em>Diocesan Bishop</strong></em><br />Francis<br /><em>...una cum famulo tuo Papa nostro Francisco...</em>');
+						} else if(country == "GU") {
+							// we can support Guam too, as a treat
+							$.get("getinfo.php?zip=96910", function( diocese ) {
+								console.log("ZIP = 96910");
+								console.log(diocese);
+								$("div#info").html(diocese);
+							});
+						} else if(country == "VI") {
+							// we can support the US Virgin Islands too, as a treat
+							$.get("getinfo.php?zip=00802", function( diocese ) {
+								console.log("ZIP = 00802");
+								console.log(diocese);
+								$("div#info").html(diocese);
+							});
+						} else if(country == "MP") {
+							// we can support Northern Mariana Islands too, as a treat
+							$.get("getinfo.php?zip=96950", function( diocese ) {
+								console.log("ZIP = 96950");
+								console.log(diocese);
+								$("div#info").html(diocese);
+							});
+						} else if(country == "AS") {
+							// we can support American Samoa too, as a treat
+							$.get("getinfo.php?zip=96799", function( diocese ) {
+								console.log("ZIP = 96799");
+								console.log(diocese);
+								$("div#info").html(diocese);
+							});
+						} else {
+							$("div#info").html("Sorry, this service is only available in the United States and Vatican City.");
+							badcountry = true;
+						}
+					} else {
+						// Churn through all returned data for a zip code
+						for(i=0; i < results.length; i++){
+							for(var j=0;j < results[i].address_components.length; j++){
+								for(var k=0; k < results[i].address_components[j].types.length; k++){
+									if(results[i].address_components[j].types[k] == "postal_code"){
+										zipcode = results[i].address_components[j].short_name;
+									}
 								}
 							}
 						}
-					}
 
-					$.get("getinfo.php?zip="+zipcode, function( diocese ) {
-						console.log("ZIP = " + zipcode);
-						console.log(diocese);
-						$("div#info").html(diocese);
-					});
+						$.get("getinfo.php?zip="+zipcode, function( diocese ) {
+							console.log("ZIP = " + zipcode);
+							console.log(diocese);
+							$("div#info").html(diocese);
+						});
+					}
 				}
 			});
 		}, function (err) {$("div#info").html(`An error occurred: ${err.message}`)});

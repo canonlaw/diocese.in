@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 27, 2022 at 12:07 PM
+-- Generation Time: Oct 27, 2022 at 12:33 PM
 -- Server version: 8.0.31-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -227,7 +227,9 @@ INSERT INTO `dioceses` (`did`, `name`, `bishop`, `title`, `auxbish`, `basezip`, 
 (182, 'Diocese of Caguas', 'Bishop Eusebio Ramos Morales', 'Bishop of Caguas', '', '00703', ''),
 (183, 'Diocese of Fajardo–Humacao', 'Bishop Luis Miranda Rivera, O.Carm.', 'Bishop of Fajardo–Humacao', '', '00987', ''),
 (184, 'Diocese of Mayagüez', 'Bishop Ángel Luis Ríos Matos', 'Bishop of Mayagüez', '', '00602', ''),
-(185, 'Diocese of Saint Thomas in the Virgin Islands', 'Bishop Jerome Feudjio', 'Bishop of Saint Thomas in the Virgin Islands', '', '00802', '');
+(185, 'Diocese of Saint Thomas in the Virgin Islands', 'Bishop Jerome Feudjio', 'Bishop of Saint Thomas in the Virgin Islands', '', '00802', ''),
+(186, 'Diocese of Chalan Kanoa', 'Bishop Ryan Jimenez\r\n', 'Bishop of Chalan Kanoa', '', '96950', ''),
+(187, 'Diocese of Samoa–Pago Pago', 'Bishop Peter Brown', 'Bishop of Samoa–Pago Pago', '', '96799', '');
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,8 @@ INSERT INTO `englat` (`nid`, `eng`, `lat`) VALUES
 (70, 'Alberto', 'Alberto'),
 (71, 'Eusebio', 'Eusebio'),
 (72, 'Ángel', 'Angelo'),
-(73, 'Reuben', 'Ruben');
+(73, 'Reuben', 'Ruben'),
+(74, 'Roberto', 'Robérto');
 
 -- --------------------------------------------------------
 
@@ -97159,7 +97162,7 @@ INSERT INTO `zipcodes` (`zip`, `did`) VALUES
 ('96796', 170),
 ('96797', 170),
 ('96798', 170),
-('96799', 170),
+('96799', 187),
 ('96800', 170),
 ('96801', 170),
 ('96802', 170),
@@ -97310,9 +97313,9 @@ INSERT INTO `zipcodes` (`zip`, `did`) VALUES
 ('96947', 171),
 ('96948', 171),
 ('96949', 171),
-('96950', 171),
-('96951', 171),
-('96952', 171),
+('96950', 186),
+('96951', 186),
+('96952', 186),
 ('96953', 171),
 ('96954', 171),
 ('96955', 171),
@@ -100393,13 +100396,13 @@ ALTER TABLE `zipcodes`
 -- AUTO_INCREMENT for table `dioceses`
 --
 ALTER TABLE `dioceses`
-  MODIFY `did` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `did` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `englat`
 --
 ALTER TABLE `englat`
-  MODIFY `nid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `nid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
