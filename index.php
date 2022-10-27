@@ -64,9 +64,23 @@
 							$("div#info").html(diocese);
 						});
 					} else if(country == "VI") {
-						// we can support Guam too, as a treat
+						// we can support the US Virgin Islands too, as a treat
 						$.get("getinfo.php?zip=00802", function( diocese ) {
 							console.log("ZIP = 00802");
+							console.log(diocese);
+							$("div#info").html(diocese);
+						});
+					} else if(country == "MP") {
+						// we can support Northern Mariana Islands too, as a treat
+						$.get("getinfo.php?zip=96950", function( diocese ) {
+							console.log("ZIP = 96950");
+							console.log(diocese);
+							$("div#info").html(diocese);
+						});
+					} else if(country == "AS") {
+						// we can support American Samoa too, as a treat
+						$.get("getinfo.php?zip=96799", function( diocese ) {
+							console.log("ZIP = 96799");
 							console.log(diocese);
 							$("div#info").html(diocese);
 						});

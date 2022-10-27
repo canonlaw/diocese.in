@@ -2,4 +2,4 @@ Use config.php to create variables $dbuser and $dbpass for the database connecti
 
 Run `php -f ./backend/newcheck.php` to update database information from the USCCB website. RUN AT YOUR OWN RISK, IN A SANDBOXED ENVIRONMENT. SUBJECT TO ISSUES AS YOU'RE PULLING FROM AN EXTERNAL SITE.
 
-./backend/newcheck.php only updates bishops in the 50 States. It will not updated the bishops of Puerto Rico, Guam, the Virgin Islands, or the Vatican. Those must be manually updated at this time.
+./backend/newcheck.php only updates bishops in the 50 States. It will not updated the bishops of Puerto Rico, Guam, American Samoa, the Northern Mariana Islands, the Virgin Islands, or the Vatican. Those must be manually updated at this time.
