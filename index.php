@@ -47,7 +47,7 @@
 					}
 				}
 
-				if(country != "US")
+				if(country != "US" && country != "PR")
 				{
 					// If you want me to make your country available,
 					// send a database with the dioceses of your country
@@ -60,6 +60,13 @@
 						// we can support Guam too, as a treat
 						$.get("getinfo.php?zip=96910", function( diocese ) {
 							console.log("ZIP = 96910");
+							console.log(diocese);
+							$("div#info").html(diocese);
+						});
+					} else if(country == "VI") {
+						// we can support Guam too, as a treat
+						$.get("getinfo.php?zip=00802", function( diocese ) {
+							console.log("ZIP = 00802");
 							console.log(diocese);
 							$("div#info").html(diocese);
 						});
