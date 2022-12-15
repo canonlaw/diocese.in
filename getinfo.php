@@ -47,7 +47,7 @@ switch (substr($printer['title'],0,3)) {
 		break;
 }
 
-if(strpos($printer['bishop'], "Diocesan Administrator") === false)
+if(strpos($printer['bishop'], "Diocesan Administrator") === false && strpos($printer['bishop'], "Bishop-elect") === false)
 {
 	$da = false;
 	$bishName = $bishWords[1];
@@ -63,7 +63,7 @@ if(strpos($printer['bishop'], "Diocesan Administrator") === false)
 	}
 } else {
 	$da = true;
-	$latinName = "<br /><span style=\"font-style: italic;font-size:15px\">The name of diocesan administrators are not mentioned in the Canon.</span>";
+	$latinName = "<br /><span style=\"font-style: italic;font-size:15px\">The names of diocesan administrators or bishops-elect are not mentioned in the Canon.</span>";
 }
 
 
