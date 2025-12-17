@@ -59,7 +59,18 @@ if(strpos($printer['bishop'], "Diocesan Administrator") === false && strpos($pri
 		$latinName = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 		$latinName = "<br /><em>... et Antistite nostro {$latinName['lat']}...</em>";
 	} else {
-		$latinName = "";
+		// see if this bishop has two first names or is otherwise special
+		$bishName = $bishWords[1]." ".$bishWords[2];
+
+		$query2 = "SELECT * FROM englat WHERE eng='{$bishName}'";
+		$result2 = mysqli_query($db,$query2);
+		if(mysqli_num_rows($result2) > 0)
+		{
+			$latinName = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+			$latinName = "<br /><em>... et Antistite nostro {$latinName['lat']}...</em>";
+		} else {
+			$latinName = "";
+		}
 	}
 } else {
 	$da = true;
